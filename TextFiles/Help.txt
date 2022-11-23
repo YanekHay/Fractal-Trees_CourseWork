@@ -1,0 +1,25 @@
+				How does the program work
+1.   The program starts with an ad page, where an image traverses across the window.
+2.   Afther that, the login form is being opened, where the user should type in the correct login and password. Otherwise the program exits.
+3.   If the username and password are entered correctly, the main page of the program runs.
+4.   There is a toolstrip on the main menu, which has the following components:
+	⬛   FractalTrees:
+		Open a window where the user can see a fractal tree, change its parameters and find out some interesting patterns.
+	⬛   Tips:
+		Open a window where the user can see some verses from the Holy Bible.
+	⬛   Arrange:
+		Has the following subbuttons:
+		◼️   Vertical:
+			Rearrange the open windows of the main menu vertically.
+		◼️   Horizontal:
+			Rearrange the open windows of the main menu horizontally
+		◼️   Minimize
+			Minimize all of the open windows of the main menu.
+	⬛   Author:
+		Open a page where info about the author and the program is written.
+	⬛   Help:
+		Open a window whch shows the structure of the program.
+	⬛   Close All:
+		Close all of the opne windows of the main menu.
+	⬛   Exit:
+		Asks wether the user is sure about exiting the program. If yes, then the application is exitted.
