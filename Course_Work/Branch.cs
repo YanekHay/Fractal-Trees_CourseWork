@@ -66,7 +66,21 @@ namespace Course_Work
             this.length = this.Len();
         }
 
+        public Branch(Point pt1, double dir, int length, float width=10f, bool visible = false, double angle_shift=0, double angle_shift_factor = 0, double height_shift = 0)
+        {
+            this.pt1 = pt1;
+            this.length = length;
+            this.dir = dir;
+            this.width = width;
+            this.visible = visible;
+            this.angle_shift=angle_shift;
+            this.angle_shift_factor=angle_shift_factor;
+            this.height_shift = height_shift;
 
+            this.pt2.X = (int)(this.pt1.X + this.length * Math.Cos(this.dir));
+            this.pt2.Y = (int)(this.pt1.Y + this.length * Math.Sin(this.dir));
+        }
+        
         /// <summary>
         /// A function for drawing a line
         /// </summary>
@@ -74,8 +88,8 @@ namespace Course_Work
         /// <param name="pen">The <see cref="Pen"/> with which the line will be drawn</param>
         public void Draw(Graphics g, Pen pen)
         {
-            g.DrawLine(pen, this.pt1, this.pt2);
-            this.visible = true;
+           g.DrawLine(pen, this.pt1, this.pt2);
+           this.visible = true;
         }
 
         /// <summary>
@@ -122,11 +136,12 @@ namespace Course_Work
             {
                 width_rand -= width_decay ;
             }
-            Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
+            //Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
+            Branch child = new Branch(this.pt2, angle_rand,(int)(this.length*height_shift), width_rand,true,angle_rand-angle,0,height_rand);
             child.parent = this;
-            child.width = width_rand;
-            child.angle_shift= angle_rand-angle;
-            child.height_shift= height_rand;
+            //child.width = width_rand;
+            //child.angle_shift= angle_rand-angle;
+            //child.height_shift= height_rand;
 
             this.children.Add(child);
             return child;
@@ -177,7 +192,7 @@ namespace Course_Work
         public Branch Flipped()
         {
             Branch res = new Branch(this.pt2, this.pt1);
-            res.dir = this.dir;
+            res.dir = 0;
             return res;
         }
 
