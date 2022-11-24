@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
@@ -15,13 +17,14 @@ namespace Course_Work
         public double dir;
         public float width;
         public double angle_shift;
+        public double angle_step_rand;
         public double angle_shift_factor;
         public double height_shift;
         public bool visible;
         public int length;
         public Branch parent;
         public List<Branch> children;
-        public Branch(int x1, int y1, int x2, int y2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_shift_factor = 0, double height_shift=0)
+        public Branch(int x1, int y1, int x2, int y2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand = 0, double angle_shift_factor = 0, double height_shift=0)
         {
             this.pt1 = new Point(x1, y1);
             this.pt2 = new Point(x2, y2);
@@ -32,11 +35,12 @@ namespace Course_Work
             this.parent = null;
             this.children = new List<Branch>();
             this.angle_shift = angle_shift;
+            this.angle_step_rand = angle_step_rand;
             this.angle_shift_factor = angle_shift_factor;
             this.height_shift = height_shift;
             this.length = this.Len();
         }
-        public Branch(Point pt1, Point pt2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_shift_factor=0, double height_shift = 0)
+        public Branch(Point pt1, Point pt2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand=0, double angle_shift_factor=0, double height_shift = 0)
         {
             this.pt1 = pt1;
             this.pt2 = pt2;
@@ -46,12 +50,12 @@ namespace Course_Work
             this.parent = null;
             this.children = new List<Branch>();
             this.angle_shift = angle_shift;
+            this.angle_step_rand = angle_step_rand;
             this.angle_shift_factor = angle_shift_factor; 
             this.height_shift = height_shift;
             this.length = this.Len();
-
         }
-        public Branch(Branch parent, Point pt2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_shift_factor = 0, double height_shift = 0)
+        public Branch(Branch parent, Point pt2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand=0, double angle_shift_factor = 0, double height_shift = 0)
         {
             this.pt1 = parent.pt2;
             this.pt2 = pt2;
@@ -61,12 +65,13 @@ namespace Course_Work
             this.parent = parent;
             this.children = new List<Branch>();
             this.angle_shift = angle_shift;
+            this.angle_step_rand = angle_step_rand;
             this.angle_shift_factor = angle_shift_factor;
             this.height_shift = height_shift;
             this.length = this.Len();
         }
 
-        public Branch(Point pt1, double dir, int length, float width=10f, bool visible = false, double angle_shift=0, double angle_shift_factor = 0, double height_shift = 0)
+        public Branch(Point pt1, double dir, int length, float width=10f, bool visible = false, double angle_shift=0, double angle_step_rand=0, double angle_shift_factor = 0, double height_shift = 0)
         {
             this.pt1 = pt1;
             this.length = length;
@@ -74,9 +79,11 @@ namespace Course_Work
             this.width = width;
             this.visible = visible;
             this.angle_shift=angle_shift;
+            this.angle_step_rand = angle_step_rand;
             this.angle_shift_factor=angle_shift_factor;
             this.height_shift = height_shift;
-
+            this.parent = null;
+            this.children = new List<Branch>();
             this.pt2.X = (int)(this.pt1.X + this.length * Math.Cos(this.dir));
             this.pt2.Y = (int)(this.pt1.Y + this.length * Math.Sin(this.dir));
         }
@@ -120,24 +127,38 @@ namespace Course_Work
             double angle_step = (-Math.PI-angle*2) / ch_n + rnd;
             for (int i = 0; i < child_num; i++)
             {
-                new_children.Add(Get_Child_Branch(angle, angle_step*i, height_factor, width_decay, angle_jiggle, height_jiggle));
-                new_children.Last().angle_shift_factor = (double)i / ch_n;
+                new_children.Add(Get_Child_Branch(angle, angle_step*i, rnd, (double)i / ch_n,  height_factor, width_decay, angle_jiggle, height_jiggle));
             }
 
             return new_children;
         }
 
-        public Branch Get_Child_Branch(double angle, double angle_shift, double height_factor, float width_decay = 0.4f, double angle_jiggle = 0.2, double height_jiggle = 0.1)
+        public Branch Get_Child_Branch(double angle,
+                                       double angle_shift,
+                                       double angle_step_rand,
+                                       double angle_shift_factor,
+                                       double height_factor,
+                                       float width_decay = 0.4f,
+                                       double angle_jiggle = 0.07,
+                                       double height_jiggle = 0.03)
         {
-            double angle_rand =  Custom_functions.Get_Random(angle + angle_shift - angle_jiggle/3, angle + angle_shift + angle_jiggle/3);
-            double height_rand = Custom_functions.Get_Random(height_factor - height_jiggle/3, height_factor + height_jiggle/3);
+            double angle_rand =  Custom_functions.Get_Random(-angle_jiggle, angle_jiggle);
+            double height_rand = Custom_functions.Get_Random(height_factor - height_jiggle, height_factor + height_jiggle);
             float width_rand = this.width;
             if (this.width>1f)
             {
                 width_rand -= width_decay ;
             }
             //Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
-            Branch child = new Branch(this.pt2, angle_rand,(int)(this.length*height_shift), width_rand,true,angle_rand-angle,0,height_rand);
+            Branch child = new Branch(this.pt2,
+                                      (this.dir-angle)+angle_shift+angle_rand,
+                                      (int)(this.length*height_rand),
+                                      width_rand,
+                                      true,
+                                      angle_rand,
+                                      angle_step_rand,
+                                      angle_shift_factor,
+                                      height_rand);
             child.parent = this;
             //child.width = width_rand;
             //child.angle_shift= angle_rand-angle;
@@ -215,7 +236,7 @@ namespace Course_Work
         
         public void Update_Dir()
         {
-            this.dir = -Math.Atan2(this.pt2.Y - this.pt1.Y, this.pt2.X - this.pt1.X);
+            this.dir = Math.Atan2(this.pt2.Y - this.pt1.Y, this.pt2.X - this.pt1.X);
         }
 
         public void Update_Children()
@@ -240,21 +261,18 @@ namespace Course_Work
         }
         public void Set_New_Angle(double new_angle)
         {
-            //if (this.angle_shift_factor < 0.5)
-            //{
-            //    this.angle_shift = this.angle_shift + (new_angle - this.dir) * this.angle_shift_factor;
-            //}
-            //else if (this.angle_shift_factor > 0.5)
-            //{
-            //    this.angle_shift = this.angle_shift - (new_angle - this.dir) * this.angle_shift_factor;
-            //}
-            this.dir = new_angle + this.angle_shift;// + (new_angle - this.dir)*2 * this.angle_shift_factor;
+            double new_angle_copy = new_angle;
+            new_angle = -new_angle;
+            new_angle = (new_angle - this.angle_shift);
+  
+            this.dir = new_angle + (-Math.PI-new_angle*2)*this.angle_shift_factor + this.angle_step_rand;
             this.pt2.X = (int)(this.pt1.X + this.length * Math.Cos(this.dir));
             this.pt2.Y = (int)(this.pt1.Y + this.length * Math.Sin(this.dir));
+            this.Rotate_Rescale(Math.PI+this.parent.dir-Math.PI/2,inplace:true);
             foreach(Branch child in this.children)
             {
                 child.Translate(this.pt2);
-                child.Set_New_Angle(new_angle+this.angle_shift);
+                child.Set_New_Angle(new_angle_copy);
             }
         }
     }
