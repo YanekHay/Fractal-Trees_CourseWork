@@ -151,7 +151,7 @@ namespace Course_Work
             }
             //Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
             Branch child = new Branch(this.pt2,
-                                      (this.dir-angle)+angle_shift+angle_rand,
+                                      1.57,
                                       (int)(this.length*height_rand),
                                       width_rand,
                                       true,
