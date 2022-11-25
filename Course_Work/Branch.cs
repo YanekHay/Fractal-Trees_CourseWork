@@ -107,17 +107,14 @@ namespace Course_Work
         /// <param name="angle_jiggle">The randomness of the angles of children branches</param>
         /// <param name="height_jiggle">The randomness of the heights of children branches</param>
         /// <returns><see cref="Branch"/> [Left <see cref="Branch"/>, Right <see cref="Branch"/>]</returns>
-        public List<Branch> Get_Child_Branches(int child_num, double angle, double height_factor, float width_decay = 0.4f, double angle_jiggle = 0.2, double height_jiggle = 0.1, bool randomize=true)
+        public List<Branch> Get_Child_Branches(int child_num, double angle, double height_factor, float width_decay = 0.4f, double angle_jiggle = 0.2, double height_jiggle = 0.1, double randomize=0.1)
         {
             angle = -angle;
-            double rnd = Custom_functions.Get_Random(-0.1, 0.1);
-            if (!randomize)
-            {
-                width_decay = 0.2f;
-                angle_jiggle = 0;
-                height_jiggle = 0;
-                rnd = 0;
-            }
+            double rnd = Custom_functions.Get_Random(-0.1, 0.1)*randomize;
+
+            angle_jiggle *= randomize;
+            height_jiggle *= randomize;
+            
             List<Branch> new_children = new List<Branch> ();
             int ch_n = child_num;
             if (ch_n > 1)
@@ -151,7 +148,7 @@ namespace Course_Work
             }
             //Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
             Branch child = new Branch(this.pt2,
-                                      1.57,
+                                      (this.dir - angle)+angle_shift+angle_rand,
                                       (int)(this.length*height_rand),
                                       width_rand,
                                       true,

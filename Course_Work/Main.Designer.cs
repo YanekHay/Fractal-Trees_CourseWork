@@ -68,7 +68,7 @@
             this.btnTrees.AutoSize = false;
             this.btnTrees.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnTrees.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnTrees.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnTrees.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnTrees.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTrees.Name = "btnTrees";
             this.btnTrees.Size = new System.Drawing.Size(120, 50);
@@ -82,7 +82,7 @@
             this.btnTips.AutoSize = false;
             this.btnTips.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnTips.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnTips.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnTips.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnTips.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTips.Name = "btnTips";
             this.btnTips.Size = new System.Drawing.Size(100, 50);
@@ -100,7 +100,7 @@
             this.Arrange_Vertical,
             this.Arrange_Horizontal,
             this.Arrange_Minimize});
-            this.btnArange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnArange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnArange.Name = "btnArange";
             this.btnArange.Size = new System.Drawing.Size(100, 50);
             this.btnArange.Text = "Arrange";
@@ -133,7 +133,7 @@
             this.btnAuthor.AutoSize = false;
             this.btnAuthor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnAuthor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnAuthor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnAuthor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAuthor.Name = "btnAuthor";
             this.btnAuthor.Size = new System.Drawing.Size(100, 50);
@@ -147,7 +147,7 @@
             this.btnHelp.AutoSize = false;
             this.btnHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnHelp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnHelp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(100, 50);
@@ -161,7 +161,7 @@
             this.btnCloseAll.AutoSize = false;
             this.btnCloseAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCloseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnCloseAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnCloseAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnCloseAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCloseAll.Name = "btnCloseAll";
             this.btnCloseAll.Size = new System.Drawing.Size(100, 50);
@@ -175,7 +175,7 @@
             this.btnExit.AutoSize = false;
             this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 50);
@@ -191,6 +191,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(91)))), ((int)(((byte)(101)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.toolStrip1);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.IsMdiContainer = true;

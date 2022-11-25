@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using WinRT;
+using Windows.Devices.Sensors;
 
 namespace Course_Work
 {
     internal class Custom_functions
     {
-        public static Color backColors =  Color.FromArgb(255, 74, 91, 102);
-        public static Color mouse_over_backColors = Color.FromArgb(255, 94, 111, 122);
-        public static Color foreColors = Color.FromArgb(255, 205, 207, 190);
-        public static Color borderColors = Color.FromArgb(255, 248, 112, 96);
+        public static Color backColors =  Color.FromArgb(255, 64,81,91);
+        public static Color mouse_over_backColors = Color.FromArgb(255, 74,81,91);
+        public static Color foreColors = Color.FromArgb(255, 255,240,230);
+        public static Color borderColors = Color.FromArgb(255, 255, 240, 230);
 
         public static Color tree_darkest = Color.FromArgb(255, 32, 46, 23);
         public static Color tree_brightest = Color.FromArgb(255, 96, 138, 71);
@@ -106,16 +108,15 @@ namespace Course_Work
             return a;
         }
 
-        public static List<Color> Get_Tree_Colors(int color_count,int alpha, Color darkest, Color lightest)
+        public static List<Color> Get_Tree_Colors(int color_count,int alpha, Color darkest)
         {
             List<Color> colors= new List<Color>();
-            double R_step = (lightest.R - darkest.R) / color_count;
-            double G_step = (lightest.G - darkest.G) / color_count;
-            double B_step = (lightest.B - darkest.B) / color_count;
-            
+
+            double step = (255 - new[] { darkest.R, darkest.G, darkest.B }.Max()) / (color_count);
+
             for (int i=0;i<color_count;i++)
             {
-                colors.Add(Color.FromArgb(alpha, (int)(R_step * i), (int)(G_step * i), (int)(B_step * i)));
+                colors.Add(Color.FromArgb(alpha, (int)(darkest.R + step*i), (int)(darkest.G + step * i), (int)(darkest.B + step * i)));
             }
 
             return colors;

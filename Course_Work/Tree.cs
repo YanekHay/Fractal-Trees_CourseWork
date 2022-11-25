@@ -1,11 +1,14 @@
 ﻿using ABI.System.Numerics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.StartScreen;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace Course_Work
@@ -19,6 +22,7 @@ namespace Course_Work
         public List<Branch> branches = new List<Branch>();
         public Graphics graphics;
         public List<Color> colors= new List<Color>();
+        //public BackgroundWorker worker = new BackgroundWorker();
         public Tree() {}
         public Tree(Branch root_branch, Graphics graphics, List<Color> colors)
         {
@@ -26,9 +30,10 @@ namespace Course_Work
             this.branches.Add(root_branch);
             this.graphics = graphics;
             this.colors = colors;
+
         }
 
-        public void Add_Generation(double angle, double height_factor, float width_decay=0.5f, int max_child_count=2, bool randomize = false, bool draw = true)
+        public void Add_Generation(double angle, double height_factor, float width_decay=0.5f, int max_child_count=2, double randomize = 0, bool draw = true)
         {
             List<Branch> new_generation = new List<Branch>();
             int i;
@@ -69,19 +74,29 @@ namespace Course_Work
                 }
             }
         }
-        public void Draw_Tree(Color back_color, List<Color> generation_colors)
+
+        public void Draw_Tree(Color back_color)
         {
+            //if (!this.worker.IsBusy) { 
+
+            //    this.colors = generation_colors;
+            //    this.graphics.Clear(back_color);
+            //    this.worker.DoWork += (e, obj) => Worker_Draw_Branches(0, this.generation_indices.Count());
+            //    this.worker.RunWorkerAsync();
+
+            //}
             this.graphics.Clear(back_color);
-            this.colors = generation_colors;
-            for(int i=0;i<generation_indices.Count;i++)
+            for (int i = 0; i < generation_indices.Count; i++)
             {
                 Draw_branches(this.branches.Skip(this.generation_indices[i].X).Take(generation_indices[i].Y - generation_indices[i].X), this.colors[i]);
             }
+
         }
+
 
         public void Reset()
         {
-            this.graphics.Clear(Custom_functions.backColors);
+            this.Draw_Tree(Custom_functions.backColors);
             this.generation_indices = new List<Point>(this.generation_indices.Take(1));
             this.branches = new List<Branch>(this.branches.Take(1));
         }
