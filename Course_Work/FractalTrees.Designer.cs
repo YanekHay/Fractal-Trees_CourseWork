@@ -278,7 +278,6 @@
             this.btn_colors.Text = "Change Colors";
             this.btn_colors.UseVisualStyleBackColor = false;
             this.btn_colors.Click += new System.EventHandler(this.btn_colors_Click);
-            this.btn_colors.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_colors_MouseUp);
             // 
             // colorDialog2
             // 

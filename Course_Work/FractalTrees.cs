@@ -20,16 +20,29 @@ namespace Course_Work.Resources
             InitializeComponent();
         }
         public Tree Tree_Glob;
-        public Graphics graphics;
-        public BackgroundWorker backgroundWorker = new BackgroundWorker();
+        public Graphics[] graphics = new Graphics[2];
+        public BackgroundWorker[] workers = new BackgroundWorker[2];
+
         private void FractalTrees_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            Branch root = new Branch(this.Width / 2, this.Height, this.Width / 2, this.Height - this.Height / 5, 10);
+            Branch root = new Branch(this.Width / 2, this.Height, this.Width / 2, this.Height - this.Height / 5, Custom_functions.tree_darkest, 10);
+
+            for (int i = 0; i < this.graphics.Length; i++)
+            {
+                //Graphics
+                this.graphics[i] = this.CreateGraphics();
+                //Workers
+                this.workers[i] = new BackgroundWorker();
+                this.workers[i].WorkerSupportsCancellation = true;
+            }
+
+
             Tree_Glob = new Tree(root_branch: root,
                                  graphics: this.graphics,
-                                 colors: Custom_functions.Get_Tree_Colors(35, 255, Custom_functions.tree_darkest));
-            this.graphics.Clear(Custom_functions.backColors);
+                                 colors: Custom_functions.Get_Tree_Colors(35, 255, Custom_functions.tree_darkest),
+                                 workers: workers);
+
             Tree_Glob.Draw_Tree(Custom_functions.backColors);
             track_angle.Value = 45;
             track_gen_angle.Value = 45;
@@ -37,8 +50,6 @@ namespace Course_Work.Resources
             track_count.Value = 2;
             Custom_functions.color_Form(this);
 
-            backgroundWorker.WorkerSupportsCancellation = true;
-            backgroundWorker.DoWork += BackgroundWorker_DoWork;
         }
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
@@ -52,13 +63,7 @@ namespace Course_Work.Resources
         private void track_angle_ValueChanged(object sender, EventArgs e)
         {
             lbl_angle.Text = track_angle.Value.ToString();
-            if (Tree_Glob.generation_indices.Count < 10) { 
-                Tree_Glob.Change_Angle_To(track_angle.Value);
-                if (!backgroundWorker.IsBusy) { 
-                    backgroundWorker.RunWorkerAsync();
-                }
-            }
-            //Tree_Glob.Draw_Tree(Custom_functions.backColors, Tree_Glob.colors);
+            Tree_Glob.Draw_Tree(Custom_functions.backColors);
         }
 
         private void track_factor_ValueChanged(object sender, EventArgs e)
@@ -68,37 +73,34 @@ namespace Course_Work.Resources
 
         private void FractalTrees_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right )
             {
-                    backgroundWorker.CancelAsync();
-                    backgroundWorker.Dispose();
-                    Tree_Glob.Reset();
-                    Tree_Glob.Draw_Tree(Custom_functions.backColors);
+                Tree_Glob.Reset();
+
+                Tree_Glob.Draw_Tree(Custom_functions.backColors);
             }
             else
             {
                 Tree_Glob.Add_Generation(Custom_functions.To_Radians(track_gen_angle.Value), (double)track_factor.Value / 100, width_decay: 0.5f, max_child_count: track_count.Value, randomize: track_randomness.Value/30, draw: false);
                 Tree_Glob.Change_Angle_To(track_angle.Value);
-                if (!backgroundWorker.IsBusy)
-                {
-                    backgroundWorker.RunWorkerAsync();
-                }
+                Tree_Glob.Draw_Tree(Custom_functions.backColors);
             }
         }
 
         private void FractalTrees_Resize(object sender, EventArgs e)
         {
-            this.graphics = this.CreateGraphics();
+
+            for (int i = 0; i < this.graphics.Length; i++)
+            {
+                //Graphics
+                this.graphics[i] = this.CreateGraphics();
+            }
         }
 
         private void track_angle_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Tree_Glob.generation_indices.Count >= 10) { 
                 Tree_Glob.Change_Angle_To(track_angle.Value);
-                if (!backgroundWorker.IsBusy) { 
-                    backgroundWorker.RunWorkerAsync();
-                }
-            }
+                Tree_Glob.Draw_Tree(Custom_functions.backColors);
         }
 
         private void trackBar4_Scroll(object sender, EventArgs e)
@@ -108,14 +110,10 @@ namespace Course_Work.Resources
 
         private void track_gen_angle_ValueChanged(object sender, EventArgs e)
         {
-
+            lbl_gen_angle.Text = track_gen_angle.Value.ToString();
         }
 
 
-        private void btn_colors_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
 
         private void btn_colors_Click(object sender, EventArgs e)
         {
@@ -156,10 +154,7 @@ namespace Course_Work.Resources
         private void track_angle_Scroll(object sender, EventArgs e)
         {
             Tree_Glob.Change_Angle_To(track_angle.Value);
-            if (!backgroundWorker.IsBusy)
-            {
-                backgroundWorker.RunWorkerAsync();
-            }
+            Tree_Glob.Draw_Tree(Custom_functions.backColors);
         }
 
         private void track_factor_Scroll(object sender, EventArgs e)

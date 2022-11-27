@@ -24,10 +24,12 @@ namespace Course_Work
         public int length;
         public Branch parent;
         public List<Branch> children;
-        public Branch(int x1, int y1, int x2, int y2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand = 0, double angle_shift_factor = 0, double height_shift=0)
+        public Color color;
+        public Branch(int x1, int y1, int x2, int y2, Color color, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand = 0, double angle_shift_factor = 0, double height_shift=0)
         {
             this.pt1 = new Point(x1, y1);
             this.pt2 = new Point(x2, y2);
+            this.color = color;
             // Computing the direction of branch with it's points
             this.Update_Dir();
             this.width = width;
@@ -40,10 +42,11 @@ namespace Course_Work
             this.height_shift = height_shift;
             this.length = this.Len();
         }
-        public Branch(Point pt1, Point pt2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand=0, double angle_shift_factor=0, double height_shift = 0)
+        public Branch(Point pt1, Point pt2, Color color, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand=0, double angle_shift_factor=0, double height_shift = 0)
         {
             this.pt1 = pt1;
             this.pt2 = pt2;
+            this.color = color;
             this.dir = -Math.Atan2(pt2.Y-pt1.Y,pt2.X-pt1.X);
             this.width = width;
             this.visible = visible;
@@ -55,10 +58,11 @@ namespace Course_Work
             this.height_shift = height_shift;
             this.length = this.Len();
         }
-        public Branch(Branch parent, Point pt2, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand=0, double angle_shift_factor = 0, double height_shift = 0)
+        public Branch(Branch parent, Point pt2, Color color, float width = 10f, bool visible = false, double angle_shift = 0, double angle_step_rand=0, double angle_shift_factor = 0, double height_shift = 0)
         {
             this.pt1 = parent.pt2;
             this.pt2 = pt2;
+            this.color = color;
             this.dir = -Math.Atan2(pt2.Y - pt1.Y, pt2.X - pt1.X);
             this.width = width;
             this.visible = visible;
@@ -71,10 +75,11 @@ namespace Course_Work
             this.length = this.Len();
         }
 
-        public Branch(Point pt1, double dir, int length, float width=10f, bool visible = false, double angle_shift=0, double angle_step_rand=0, double angle_shift_factor = 0, double height_shift = 0)
+        public Branch(Point pt1, double dir, int length, Color color, float width=10f, bool visible = false, double angle_shift=0, double angle_step_rand=0, double angle_shift_factor = 0, double height_shift = 0)
         {
             this.pt1 = pt1;
             this.length = length;
+            this.color = color;
             this.dir = dir;
             this.width = width;
             this.visible = visible;
@@ -93,10 +98,11 @@ namespace Course_Work
         /// </summary>
         /// <param name="g"> The graphics where the line needs to be drawn</param>
         /// <param name="pen">The <see cref="Pen"/> with which the line will be drawn</param>
-        public void Draw(Graphics g, Pen pen)
+        public void Draw(Graphics g)
         {
-           g.DrawLine(pen, this.pt1, this.pt2);
-           this.visible = true;
+            Pen pen = new Pen(this.color, this.width);
+            g.DrawLine(pen, this.pt1, this.pt2);
+            this.visible = true;
         }
 
         /// <summary>
@@ -107,7 +113,7 @@ namespace Course_Work
         /// <param name="angle_jiggle">The randomness of the angles of children branches</param>
         /// <param name="height_jiggle">The randomness of the heights of children branches</param>
         /// <returns><see cref="Branch"/> [Left <see cref="Branch"/>, Right <see cref="Branch"/>]</returns>
-        public List<Branch> Get_Child_Branches(int child_num, double angle, double height_factor, float width_decay = 0.4f, double angle_jiggle = 0.2, double height_jiggle = 0.1, double randomize=0.1)
+        public List<Branch> Get_Child_Branches(int child_num, double angle, double height_factor,Color child_color, float width_decay = 0.4f, double angle_jiggle = 0.2, double height_jiggle = 0.1, double randomize=0.1)
         {
             angle = -angle;
             double rnd = Custom_functions.Get_Random(-0.1, 0.1)*randomize;
@@ -124,7 +130,7 @@ namespace Course_Work
             double angle_step = (-Math.PI-angle*2) / ch_n + rnd;
             for (int i = 0; i < child_num; i++)
             {
-                new_children.Add(Get_Child_Branch(angle, angle_step*i, rnd, (double)i / ch_n,  height_factor, width_decay, angle_jiggle, height_jiggle));
+                new_children.Add(Get_Child_Branch(angle, angle_step*i, rnd, (double)i / ch_n,  height_factor,child_color, width_decay, angle_jiggle, height_jiggle));
             }
 
             return new_children;
@@ -135,6 +141,7 @@ namespace Course_Work
                                        double angle_step_rand,
                                        double angle_shift_factor,
                                        double height_factor,
+                                       Color child_color,
                                        float width_decay = 0.4f,
                                        double angle_jiggle = 0.07,
                                        double height_jiggle = 0.03)
@@ -148,14 +155,15 @@ namespace Course_Work
             }
             //Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
             Branch child = new Branch(this.pt2,
-                                      (this.dir - angle)+angle_shift+angle_rand,
-                                      (int)(this.length*height_rand),
+                                      (this.dir - angle) + angle_shift + angle_rand,
+                                      (int)(this.length * height_rand),
+                                      child_color,
                                       width_rand,
                                       true,
                                       angle_rand,
                                       angle_step_rand,
                                       angle_shift_factor,
-                                      height_rand);
+                                      height_rand); 
             child.parent = this;
             //child.width = width_rand;
             //child.angle_shift= angle_rand-angle;
@@ -209,7 +217,7 @@ namespace Course_Work
         /// <returns><see cref="Branch"/>(<see cref="Point"/> pt1, <see cref="Point"/> pt2, <see cref="double"/> dir)</returns>
         public Branch Flipped()
         {
-            Branch res = new Branch(this.pt2, this.pt1);
+            Branch res = new Branch(this.pt2, this.pt1, this.color);
             res.dir = 0;
             return res;
         }

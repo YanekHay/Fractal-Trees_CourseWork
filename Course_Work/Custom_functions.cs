@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using WinRT;
 using Windows.Devices.Sensors;
+using Windows.UI.Composition;
+using System.ComponentModel;
 
 namespace Course_Work
 {
@@ -120,6 +122,23 @@ namespace Course_Work
             }
 
             return colors;
+        }
+
+        public static void Wait(BackgroundWorker worker)
+        {
+            while (worker.IsBusy)
+            {
+            }
+        }
+
+        public static void Cancel_Work(BackgroundWorker worker)
+        {
+            worker.WorkerSupportsCancellation = true;
+            worker.CancelAsync();
+            while (worker.IsBusy)
+            {
+                
+            }
         }
     }
 }
