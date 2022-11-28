@@ -108,15 +108,32 @@ namespace Course_Work
             return a;
         }
 
-        public static List<Color> Get_Tree_Colors(int color_count,int alpha, Color darkest)
+        public static List<Color> Get_Tree_Colors(int color_count, Color darkest)
         {
             List<Color> colors= new List<Color>();
 
             double step = (255 - new[] { darkest.R, darkest.G, darkest.B }.Max()) / (color_count);
-
+            int alpha = darkest.A;
             for (int i=0;i<color_count;i++)
             {
                 colors.Add(Color.FromArgb(alpha, (int)(darkest.R + step*i), (int)(darkest.G + step * i), (int)(darkest.B + step * i)));
+            }
+
+            return colors;
+        }
+
+        public static List<Color> Get_Tree_Colors(int color_count, Color darkest, Color brightest)
+        {
+            List<Color> colors = new List<Color>();
+
+            double R_step = (brightest.R - darkest.R) / color_count;
+            double G_step = (brightest.G - darkest.G) / color_count;
+            double B_step = (brightest.B - darkest.B) / color_count;
+
+            int alpha = darkest.A;
+            for (int i = 0; i < color_count; i++)
+            {
+                colors.Add(Color.FromArgb(alpha, (int)(darkest.R + R_step * i), (int)(darkest.G + G_step * i), (int)(darkest.B + B_step * i)));
             }
 
             return colors;

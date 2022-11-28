@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace Course_Work
@@ -147,8 +148,11 @@ namespace Course_Work
                 width_rand -= width_decay ;
             }
             //Branch child = this.Flipped().Rotate_Rescale(angle_rand, height_rand);
+            //this.dir = angle + (-Math.PI - angle * 2) * angle_shift_factor + angle_step_rand;
+            //this.dir = new_angle + (-Math.PI - new_angle * 2) * this.angle_shift_factor + this.angle_step_rand;
+
             Branch child = new Branch(this.pt2,
-                                      (this.dir - angle)+angle_shift+angle_rand,
+                                      (this.dir+Math.PI/2) +angle + (-Math.PI - angle * 2) * angle_shift_factor + angle_step_rand, //(this.dir - angle)+angle_shift+angle_rand,
                                       (int)(this.length*height_rand),
                                       width_rand,
                                       true,
@@ -157,8 +161,9 @@ namespace Course_Work
                                       angle_shift_factor,
                                       height_rand);
             child.parent = this;
+            child.pt1 = this.pt2;
             //child.width = width_rand;
-            //child.angle_shift= angle_rand-angle;
+            //child.angle_shift= angle_rand-angle;u
             //child.height_shift= height_rand;
 
             this.children.Add(child);

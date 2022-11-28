@@ -22,7 +22,7 @@ namespace Course_Work
         public List<Branch> branches = new List<Branch>();
         public Graphics graphics;
         public List<Color> colors= new List<Color>();
-        //public BackgroundWorker worker = new BackgroundWorker();
+        public BackgroundWorker worker = new BackgroundWorker();
         public Tree() {}
         public Tree(Branch root_branch, Graphics graphics, List<Color> colors)
         {
@@ -60,7 +60,11 @@ namespace Course_Work
             {
                 Pen pen = new Pen(barnch_color, branch.width);
                 pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-                branch.Draw(this.graphics, pen);               
+                branch.Draw(this.graphics, pen);
+                if (this.worker.CancellationPending)
+                {
+                    return;
+                }
             }
         }
         public void Change_Angle_To(double angle)
@@ -77,26 +81,15 @@ namespace Course_Work
 
         public void Draw_Tree(Color back_color)
         {
-            //if (!this.worker.IsBusy) { 
-
-            //    this.colors = generation_colors;
-            //    this.graphics.Clear(back_color);
-            //    this.worker.DoWork += (e, obj) => Worker_Draw_Branches(0, this.generation_indices.Count());
-            //    this.worker.RunWorkerAsync();
-
-            //}
-            this.graphics.Clear(back_color);
             for (int i = 0; i < generation_indices.Count; i++)
             {
                 Draw_branches(this.branches.Skip(this.generation_indices[i].X).Take(generation_indices[i].Y - generation_indices[i].X), this.colors[i]);
             }
-
         }
 
 
         public void Reset()
         {
-            this.Draw_Tree(Custom_functions.backColors);
             this.generation_indices = new List<Point>(this.generation_indices.Take(1));
             this.branches = new List<Branch>(this.branches.Take(1));
         }
