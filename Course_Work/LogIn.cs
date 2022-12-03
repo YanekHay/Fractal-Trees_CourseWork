@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Course_Work.Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,12 +38,16 @@ namespace Course_Work
             }
             else
             {
-                Main main = new Main();
-                main.Show();
+                Custom_functions.main_form.Show();
                 this.Close();
             }
 
 
+        }
+
+        private void LogIn_Load(object sender, EventArgs e)
+        {
+            Custom_functions.color_Form(this);
         }
     }
 }

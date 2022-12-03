@@ -22,19 +22,16 @@ namespace Course_Work
         private AboutForm aboutform = new();
         private HelpForm helpform = new();
         private FractalTrees fractaltrees = new();
+        private Sure sureform = new();
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            tips.WindowState = FormWindowState.Maximized;
             if (tips.IsDisposed) {
                 tips = new();
-                aboutform.MdiParent = this;
-                Console.WriteLine(this.MdiChildren.Length.ToString());
+                tips.MdiParent = this;
             }
+            tips.WindowState = FormWindowState.Maximized;
+            tips.BringToFront();
             tips.Show();
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
 
         }
 
@@ -57,14 +54,13 @@ namespace Course_Work
 
         private void Main_Load(object sender, EventArgs e)
         {
+            Custom_functions.color_Form(this);
+
             this.MinimumSize = new Size(900, 550);
 
             // TIPS //
-            tips.TopLevel = false;
-            this.Controls.Add(tips);
-            tips.WindowState = FormWindowState.Maximized;
             tips.MdiParent = this;
-
+            tips.WindowState = FormWindowState.Maximized;
             //////////
 
             // ABOUT //
@@ -77,24 +73,22 @@ namespace Course_Work
             helpform.WindowState = FormWindowState.Maximized;
             //////////
 
-            // FRACTAL TREES //
-            fractaltrees.MdiParent = this;
-            fractaltrees.WindowState = FormWindowState.Maximized;
-            //////////
         }
 
         private void btnCloseAll_Click(object sender, EventArgs e)
         {
-            foreach (Form child in this.MdiChildren)
-            {
-                //Console.WriteLine(child.Name);
-                child.Hide();
-            }
+            Custom_functions.Arrage_children(this, 0);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+            if (sureform.IsDisposed)
+            {
+                sureform = new();
+            }
+
+            sureform.Show();
+
         }
 
         private void btnAuthor_Click(object sender, EventArgs e)
@@ -102,52 +96,68 @@ namespace Course_Work
             if (aboutform.IsDisposed) { 
                 aboutform = new();
                 aboutform.MdiParent = this;
-                Console.WriteLine(this.MdiChildren.Length.ToString());
             }
             aboutform.WindowState = FormWindowState.Maximized;
             aboutform.Update();
+            aboutform.BringToFront();
             aboutform.Show();
+
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
             if (helpform.IsDisposed) { 
                 helpform = new();
-                aboutform.MdiParent = this;
-                Console.WriteLine(this.MdiChildren.Length); 
+                helpform.MdiParent = this;
             }
 
             helpform.WindowState = FormWindowState.Maximized;
+            helpform.BringToFront();
             helpform.Show();
         }
 
         private void Arrange_Vertical_Click(object sender, EventArgs e)
         {
-            this.LayoutMdi(System.Windows.Forms.MdiLayout.TileVertical);
+            Custom_functions.Arrage_children(this,1);
         }
 
         private void Arrange_Horizontal_Click(object sender, EventArgs e)
         {
-            this.LayoutMdi(System.Windows.Forms.MdiLayout.TileHorizontal);
+            Custom_functions.Arrage_children(this,2);
         }
 
         private void Arrange_Minimize_Click(object sender, EventArgs e)
         {
-            foreach (Form child in this.MdiChildren)
-            {
-                child.WindowState= FormWindowState.Minimized;
-            }
+            Custom_functions.Arrage_children(this, 3);
         }
+
 
         private void btnTrees_Click(object sender, EventArgs e)
         {
             if (fractaltrees.IsDisposed)
             {
                 fractaltrees = new();
-                fractaltrees.MdiParent = this;
-                Console.WriteLine(this.MdiChildren.Length);
             }
             fractaltrees.Show();
+
+            this.Close();
+        }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+            Custom_functions.Arrage_children(this, Custom_functions.child_alignment);
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!fractaltrees.Visible) { 
+                Application.Exit();
+            }
+        }
+
+        private void btnArange_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -54,11 +54,11 @@ namespace Course_Work
                 Draw_branches(new_generation, this.colors[this.generation_indices.Count]);
             }
         }
-        public void Draw_branches(IEnumerable<Branch> branches, Color barnch_color)
+        public void Draw_branches(IEnumerable<Branch> branches, Color branch_color)
         {
             foreach(Branch branch in branches)
             {
-                Pen pen = new Pen(barnch_color, branch.width);
+                Pen pen = new Pen(branch_color, branch.width);
                 pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
                 branch.Draw(this.graphics, pen);
                 if (this.worker.CancellationPending)

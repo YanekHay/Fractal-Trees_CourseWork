@@ -26,5 +26,11 @@ namespace Course_Work
         {
             this.Close();
         }
+
+        private void Sure_Load(object sender, EventArgs e)
+        {
+            Custom_functions.color_Form(this);
+
+        }
     }
 }

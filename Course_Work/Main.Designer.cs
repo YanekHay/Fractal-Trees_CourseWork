@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnTrees = new System.Windows.Forms.ToolStripButton();
             this.btnTips = new System.Windows.Forms.ToolStripButton();
@@ -61,7 +62,6 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 53);
             this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnTrees
             // 
@@ -104,27 +104,28 @@
             this.btnArange.Name = "btnArange";
             this.btnArange.Size = new System.Drawing.Size(100, 50);
             this.btnArange.Text = "Arrange";
+            this.btnArange.Click += new System.EventHandler(this.btnArange_Click);
             this.btnArange.MouseEnter += new System.EventHandler(this.btnTrees_MouseEnter);
             this.btnArange.MouseLeave += new System.EventHandler(this.btnTrees_MouseLeave);
             // 
             // Arrange_Vertical
             // 
             this.Arrange_Vertical.Name = "Arrange_Vertical";
-            this.Arrange_Vertical.Size = new System.Drawing.Size(169, 26);
+            this.Arrange_Vertical.Size = new System.Drawing.Size(224, 26);
             this.Arrange_Vertical.Text = "Vertical";
             this.Arrange_Vertical.Click += new System.EventHandler(this.Arrange_Vertical_Click);
             // 
             // Arrange_Horizontal
             // 
             this.Arrange_Horizontal.Name = "Arrange_Horizontal";
-            this.Arrange_Horizontal.Size = new System.Drawing.Size(169, 26);
+            this.Arrange_Horizontal.Size = new System.Drawing.Size(224, 26);
             this.Arrange_Horizontal.Text = "Horizontal";
             this.Arrange_Horizontal.Click += new System.EventHandler(this.Arrange_Horizontal_Click);
             // 
             // Arrange_Minimize
             // 
             this.Arrange_Minimize.Name = "Arrange_Minimize";
-            this.Arrange_Minimize.Size = new System.Drawing.Size(169, 26);
+            this.Arrange_Minimize.Size = new System.Drawing.Size(224, 26);
             this.Arrange_Minimize.Text = "Minimize";
             this.Arrange_Minimize.Click += new System.EventHandler(this.Arrange_Minimize_Click);
             // 
@@ -193,11 +194,15 @@
             this.Controls.Add(this.toolStrip1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.IsMdiContainer = true;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

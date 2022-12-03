@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FractalTrees));
             this.track_count = new System.Windows.Forms.TrackBar();
             this.lbl_count = new System.Windows.Forms.Label();
             this.lbl_angle = new System.Windows.Forms.Label();
@@ -58,7 +60,11 @@
             this.track_width = new System.Windows.Forms.TrackBar();
             this.lbl_width = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btn_hide = new System.Windows.Forms.Button();
+            this.btn_backcolor = new System.Windows.Forms.Button();
+            this.colorDialog3 = new System.Windows.Forms.ColorDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.track_count)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_angle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_factor)).BeginInit();
@@ -68,7 +74,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.track_B)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_alpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_width)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // track_count
@@ -102,7 +107,7 @@
             this.lbl_angle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_angle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_angle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_angle.Location = new System.Drawing.Point(183, 60);
+            this.lbl_angle.Location = new System.Drawing.Point(183, 54);
             this.lbl_angle.Name = "lbl_angle";
             this.lbl_angle.Size = new System.Drawing.Size(50, 20);
             this.lbl_angle.TabIndex = 3;
@@ -112,7 +117,7 @@
             // 
             this.track_angle.AutoSize = false;
             this.track_angle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_angle.Location = new System.Drawing.Point(1, 83);
+            this.track_angle.Location = new System.Drawing.Point(1, 77);
             this.track_angle.Maximum = 360;
             this.track_angle.Name = "track_angle";
             this.track_angle.Size = new System.Drawing.Size(244, 30);
@@ -128,7 +133,7 @@
             this.lbl_factor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_factor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_factor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_factor.Location = new System.Drawing.Point(182, 172);
+            this.lbl_factor.Location = new System.Drawing.Point(183, 162);
             this.lbl_factor.Name = "lbl_factor";
             this.lbl_factor.Size = new System.Drawing.Size(50, 20);
             this.lbl_factor.TabIndex = 5;
@@ -138,7 +143,7 @@
             // 
             this.track_factor.AutoSize = false;
             this.track_factor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_factor.Location = new System.Drawing.Point(-2, 195);
+            this.track_factor.Location = new System.Drawing.Point(-1, 185);
             this.track_factor.Maximum = 150;
             this.track_factor.Minimum = 10;
             this.track_factor.Name = "track_factor";
@@ -170,7 +175,7 @@
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label2.Location = new System.Drawing.Point(1, 60);
+            this.label2.Location = new System.Drawing.Point(1, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 20);
             this.label2.TabIndex = 6;
@@ -183,7 +188,7 @@
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label3.Location = new System.Drawing.Point(-1, 172);
+            this.label3.Location = new System.Drawing.Point(0, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 20);
             this.label3.TabIndex = 6;
@@ -196,7 +201,7 @@
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label4.Location = new System.Drawing.Point(1, 228);
+            this.label4.Location = new System.Drawing.Point(2, 218);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 20);
             this.label4.TabIndex = 21;
@@ -208,7 +213,7 @@
             this.lbl_randomness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_randomness.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_randomness.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_randomness.Location = new System.Drawing.Point(184, 228);
+            this.lbl_randomness.Location = new System.Drawing.Point(185, 218);
             this.lbl_randomness.Name = "lbl_randomness";
             this.lbl_randomness.Size = new System.Drawing.Size(50, 20);
             this.lbl_randomness.TabIndex = 20;
@@ -218,7 +223,7 @@
             // 
             this.track_randomness.AutoSize = false;
             this.track_randomness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_randomness.Location = new System.Drawing.Point(0, 251);
+            this.track_randomness.Location = new System.Drawing.Point(1, 241);
             this.track_randomness.Maximum = 150;
             this.track_randomness.Name = "track_randomness";
             this.track_randomness.Size = new System.Drawing.Size(244, 30);
@@ -236,11 +241,11 @@
             this.btn_colors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(61)))), ((int)(((byte)(71)))));
             this.btn_colors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_colors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.btn_colors.Location = new System.Drawing.Point(324, -1);
+            this.btn_colors.Location = new System.Drawing.Point(2, 309);
             this.btn_colors.Name = "btn_colors";
-            this.btn_colors.Size = new System.Drawing.Size(232, 33);
+            this.btn_colors.Size = new System.Drawing.Size(243, 33);
             this.btn_colors.TabIndex = 22;
-            this.btn_colors.Text = "Change Colors";
+            this.btn_colors.Text = "Change Tree Colors (C)";
             this.btn_colors.UseVisualStyleBackColor = false;
             this.btn_colors.Click += new System.EventHandler(this.btn_colors_Click);
             // 
@@ -255,7 +260,7 @@
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label5.Location = new System.Drawing.Point(324, 48);
+            this.label5.Location = new System.Drawing.Point(266, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(105, 20);
             this.label5.TabIndex = 25;
@@ -267,7 +272,7 @@
             this.lbl_R.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_R.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_R.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_R.Location = new System.Drawing.Point(506, 48);
+            this.lbl_R.Location = new System.Drawing.Point(448, 5);
             this.lbl_R.Name = "lbl_R";
             this.lbl_R.Size = new System.Drawing.Size(50, 20);
             this.lbl_R.TabIndex = 24;
@@ -277,7 +282,7 @@
             // 
             this.track_R.AutoSize = false;
             this.track_R.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_R.Location = new System.Drawing.Point(324, 71);
+            this.track_R.Location = new System.Drawing.Point(266, 28);
             this.track_R.Maximum = 255;
             this.track_R.Name = "track_R";
             this.track_R.Size = new System.Drawing.Size(244, 30);
@@ -293,7 +298,7 @@
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label7.Location = new System.Drawing.Point(324, 104);
+            this.label7.Location = new System.Drawing.Point(266, 60);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(121, 20);
             this.label7.TabIndex = 28;
@@ -305,7 +310,7 @@
             this.lbl_G.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_G.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_G.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_G.Location = new System.Drawing.Point(506, 104);
+            this.lbl_G.Location = new System.Drawing.Point(448, 60);
             this.lbl_G.Name = "lbl_G";
             this.lbl_G.Size = new System.Drawing.Size(50, 20);
             this.lbl_G.TabIndex = 27;
@@ -315,7 +320,7 @@
             // 
             this.track_G.AutoSize = false;
             this.track_G.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_G.Location = new System.Drawing.Point(324, 127);
+            this.track_G.Location = new System.Drawing.Point(266, 83);
             this.track_G.Maximum = 255;
             this.track_G.Name = "track_G";
             this.track_G.Size = new System.Drawing.Size(244, 30);
@@ -331,7 +336,7 @@
             this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label9.Location = new System.Drawing.Point(324, 160);
+            this.label9.Location = new System.Drawing.Point(266, 117);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(109, 20);
             this.label9.TabIndex = 31;
@@ -343,7 +348,7 @@
             this.lbl_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_B.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_B.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_B.Location = new System.Drawing.Point(506, 160);
+            this.lbl_B.Location = new System.Drawing.Point(448, 117);
             this.lbl_B.Name = "lbl_B";
             this.lbl_B.Size = new System.Drawing.Size(50, 20);
             this.lbl_B.TabIndex = 30;
@@ -353,7 +358,7 @@
             // 
             this.track_B.AutoSize = false;
             this.track_B.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_B.Location = new System.Drawing.Point(324, 183);
+            this.track_B.Location = new System.Drawing.Point(266, 140);
             this.track_B.Maximum = 255;
             this.track_B.Name = "track_B";
             this.track_B.Size = new System.Drawing.Size(244, 30);
@@ -369,7 +374,7 @@
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label6.Location = new System.Drawing.Point(324, 228);
+            this.label6.Location = new System.Drawing.Point(266, 218);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(117, 20);
             this.label6.TabIndex = 34;
@@ -381,7 +386,7 @@
             this.lbl_alpha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_alpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_alpha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_alpha.Location = new System.Drawing.Point(506, 228);
+            this.lbl_alpha.Location = new System.Drawing.Point(448, 218);
             this.lbl_alpha.Name = "lbl_alpha";
             this.lbl_alpha.Size = new System.Drawing.Size(50, 20);
             this.lbl_alpha.TabIndex = 33;
@@ -391,7 +396,7 @@
             // 
             this.track_alpha.AutoSize = false;
             this.track_alpha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_alpha.Location = new System.Drawing.Point(324, 251);
+            this.track_alpha.Location = new System.Drawing.Point(266, 241);
             this.track_alpha.Maximum = 255;
             this.track_alpha.Name = "track_alpha";
             this.track_alpha.Size = new System.Drawing.Size(244, 30);
@@ -404,7 +409,7 @@
             // 
             this.track_width.AutoSize = false;
             this.track_width.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.track_width.Location = new System.Drawing.Point(0, 139);
+            this.track_width.Location = new System.Drawing.Point(0, 133);
             this.track_width.Maximum = 30;
             this.track_width.Minimum = 5;
             this.track_width.Name = "track_width";
@@ -420,7 +425,7 @@
             this.lbl_width.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbl_width.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_width.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.lbl_width.Location = new System.Drawing.Point(182, 116);
+            this.lbl_width.Location = new System.Drawing.Point(182, 110);
             this.lbl_width.Name = "lbl_width";
             this.lbl_width.Size = new System.Drawing.Size(50, 20);
             this.lbl_width.TabIndex = 17;
@@ -433,27 +438,62 @@
             this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
-            this.label10.Location = new System.Drawing.Point(0, 116);
+            this.label10.Location = new System.Drawing.Point(0, 110);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(139, 20);
             this.label10.TabIndex = 18;
             this.label10.Text = "Generation Width";
             // 
-            // pictureBox1
+            // btnSave
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(587, 116);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(346, 335);
-            this.pictureBox1.TabIndex = 35;
-            this.pictureBox1.TabStop = false;
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(61)))), ((int)(((byte)(71)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
+            this.btnSave.Location = new System.Drawing.Point(960, 54);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(144, 55);
+            this.btnSave.TabIndex = 22;
+            this.btnSave.Text = "Save Image (S)";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btn_hide
+            // 
+            this.btn_hide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(61)))), ((int)(((byte)(71)))));
+            this.btn_hide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_hide.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
+            this.btn_hide.Location = new System.Drawing.Point(960, 0);
+            this.btn_hide.Name = "btn_hide";
+            this.btn_hide.Size = new System.Drawing.Size(144, 57);
+            this.btn_hide.TabIndex = 22;
+            this.btn_hide.Text = "Hide Controls (F)";
+            this.btn_hide.UseVisualStyleBackColor = false;
+            this.btn_hide.Click += new System.EventHandler(this.btn_hide_Click);
+            // 
+            // btn_backcolor
+            // 
+            this.btn_backcolor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(61)))), ((int)(((byte)(71)))));
+            this.btn_backcolor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_backcolor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
+            this.btn_backcolor.Location = new System.Drawing.Point(266, 309);
+            this.btn_backcolor.Name = "btn_backcolor";
+            this.btn_backcolor.Size = new System.Drawing.Size(241, 33);
+            this.btn_backcolor.TabIndex = 22;
+            this.btn_backcolor.Text = "Change Background Color (B)";
+            this.btn_backcolor.UseVisualStyleBackColor = false;
+            this.btn_backcolor.Click += new System.EventHandler(this.btn_backcolor_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FractalTrees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
-            this.ClientSize = new System.Drawing.Size(945, 481);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(1106, 527);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lbl_alpha);
             this.Controls.Add(this.track_alpha);
@@ -466,6 +506,9 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lbl_R);
             this.Controls.Add(this.track_R);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btn_hide);
+            this.Controls.Add(this.btn_backcolor);
             this.Controls.Add(this.btn_colors);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbl_randomness);
@@ -484,10 +527,16 @@
             this.Controls.Add(this.track_count);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(230)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "FractalTrees";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "Visible";
             this.Text = "FractalTrees";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FractalTrees_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FractalTrees_KeyUp);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FractalTrees_MouseUp);
             this.Resize += new System.EventHandler(this.FractalTrees_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.track_count)).EndInit();
@@ -499,7 +548,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.track_B)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_alpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.track_width)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -537,6 +585,10 @@
         private TrackBar track_width;
         private Label lbl_width;
         private Label label10;
-        private PictureBox pictureBox1;
+        private Button btnSave;
+        private Button btn_hide;
+        private Button btn_backcolor;
+        private ColorDialog colorDialog3;
+        private System.Windows.Forms.Timer timer1;
     }
 }

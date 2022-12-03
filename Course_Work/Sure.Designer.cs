@@ -82,8 +82,11 @@
             this.Controls.Add(this.btn_yes);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(207)))), ((int)(((byte)(190)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Sure";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sure";
+            this.Load += new System.EventHandler(this.Sure_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using WinRT;
 using Windows.Devices.Sensors;
+using System.Runtime.CompilerServices;
+using Windows.Gaming.Input.Custom;
 
 namespace Course_Work
 {
@@ -24,8 +26,11 @@ namespace Course_Work
         public static Random rand = new Random();
         public static int padding = 20;
 
-        public static string file_root = "..\\..\\..\\..\\TextFiles\\";
+        public static Main main_form = new Main();
 
+        public static string file_root = ".\\MyFiles\\";
+
+        public static int child_alignment=1;
         /// <summary>
         /// A method for converting any string to a Hash with MD5 algorithm
         /// </summary>
@@ -54,7 +59,7 @@ namespace Course_Work
         /// </summary>
         /// <param name="filename">The path of the file which will be read</param>
         /// <returns></returns>
-        public static string[] ReadFile(string root= "..\\..\\..\\..\\TextFiles\\", string filename =  "Account.hash")
+        public static string[] ReadFile(string root= ".\\MyFiles\\", string filename =  "Account.hash")
         {
             string[] lines = System.IO.File.ReadAllLines(root + filename);
             return lines;
@@ -76,6 +81,7 @@ namespace Course_Work
 
         public static void color_Form(Form form)
         {
+            form.BackColor = backColors;
             foreach(Control control in form.Controls)
             {
                 control.BackColor = backColors;
@@ -137,6 +143,86 @@ namespace Course_Work
             }
 
             return colors;
+        }
+
+
+        /// <summary>
+        /// A function for getting a list of open MdiChildren of given form
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns><see cref="List{Form}"/> List of the open MdiChildren</returns>
+        public static List<Form> Get_Open_Children(Form form)
+        {
+            List<Form> open_children = new();
+            foreach (Form child in form.MdiChildren)
+            {
+                if (child.Visible)
+                {
+                    open_children.Add(child);
+                }
+            }
+            return open_children;
+        }
+        public static void Arrage_children(Form form, int child_alignment)
+        {
+            List<Form> open_children = Get_Open_Children(form);
+            if (open_children.Count == 0)
+            {
+                return;
+            }
+            switch (child_alignment)
+            {
+                case 0: //Close All
+                    Custom_functions.child_alignment = 0;
+                    foreach (Form child in open_children)
+                    {
+                        if (!child.IsDisposed) { 
+                            child.Hide();
+                        }
+                    }
+                    break;
+                case 1: //Vertical
+                    int width = (form.Width-50) / open_children.Count;
+                    int left = 0;
+                    Custom_functions.child_alignment = 1;
+                    foreach (Form child in open_children)
+                    {
+                        child.WindowState = FormWindowState.Normal;
+                        child.Width = width;
+                        child.Height = form.Height-100;
+
+                        child.Left = left;
+                        child.Top = 0;
+                        child.Show();
+                        left += child.Width;
+                    }
+                    break;
+                case 2: //Horizontal
+                    int height = (form.Height-100) / open_children.Count;
+                    int top = 0;
+                    Custom_functions.child_alignment = 2;
+
+                    foreach (Form child in open_children)
+                    {
+                        child.WindowState = FormWindowState.Normal;
+                        child.Top = top;
+                        child.Height = height;
+                        child.Width = form.Width-50;
+                        child.Left = 0;
+                        child.Show();
+                        top += height;
+                    }
+                    break;
+                case 3: //Minimized
+                    Custom_functions.child_alignment = 2;
+
+                    foreach (Form child in open_children)
+                    {
+                        child.WindowState = FormWindowState.Minimized;
+                    }
+                    break;
+
+            }
         }
     }
 }

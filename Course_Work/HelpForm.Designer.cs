@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
             this.lbl = new System.Windows.Forms.Label();
             this.btn_text = new System.Windows.Forms.Button();
             this.btn_ok = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             this.lbl.TabIndex = 0;
             this.lbl.Text = "Help";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl.Click += new System.EventHandler(this.lbl_Click);
             // 
             // btn_text
             // 
@@ -93,10 +95,13 @@
             this.Controls.Add(this.lbl);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HelpForm";
             this.Padding = new System.Windows.Forms.Padding(20);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "HelpForm";
             this.Load += new System.EventHandler(this.HelpForm_Load);
+            this.Resize += new System.EventHandler(this.HelpForm_Resize);
             this.ResumeLayout(false);
 
         }

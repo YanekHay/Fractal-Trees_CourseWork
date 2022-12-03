@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "f0UP2ZeLbwfAVZCsQ26Ln4hC+ocoCpg+vjiZPNV67k8+F70px9OEWCQLhBBT4oIOO/CXy8fnAccqBvmaNmVyjw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Yanek\\Dropbox\\College\\Course_work\\Course_Work\\Course_Work\\Fractal_Trees.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yanek\\.nuget\\packages\\microsoft.visualstudio.setup.configuration.interop\\3.4.2244\\microsoft.visualstudio.setup.configuration.interop.3.4.2244.nupkg.sha512",
+    "C:\\Users\\Yanek\\.nuget\\packages\\wix.toolset\\3.9.1208\\wix.toolset.3.9.1208.nupkg.sha512",
+    "C:\\Users\\Yanek\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.27\\microsoft.windows.sdk.net.ref.10.0.22621.27.nupkg.sha512"
+  ],
+  "logs": []
+}

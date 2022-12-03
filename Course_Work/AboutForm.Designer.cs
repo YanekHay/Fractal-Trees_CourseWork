@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.lbl = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@
             this.label1.Size = new System.Drawing.Size(700, 358);
             this.label1.TabIndex = 3;
             this.label1.Text = "Creator: Yanek Radiki Hayrapetyan\r\nCollege: Yerevan State College of Informatics\r" +
-    "\nCreation Time: 4 days";
+    "\nCreation Time: 2 Weeks";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // timer1
@@ -100,8 +101,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(81)))), ((int)(((byte)(91)))));
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = global::Course_Work.Properties.Resources.logo;
-            this.pictureBox1.InitialImage = global::Course_Work.Properties.Resources.logo;
+            this.pictureBox1.Image = global::Fractal_Trees.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(588, 92);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(162, 302);
@@ -122,10 +122,13 @@
             this.Controls.Add(this.lbl);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(158)))), ((int)(((byte)(107)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
             this.Padding = new System.Windows.Forms.Padding(50, 0, 50, 0);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AboutForm";
             this.Load += new System.EventHandler(this.AboutForm_Load);
+            this.Resize += new System.EventHandler(this.AboutForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

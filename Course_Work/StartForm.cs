@@ -12,6 +12,7 @@ namespace Course_Work
         public byte dir = 0;
         private int padding = 50;
         public LogIn LogIn_Form = new LogIn();
+        private int total_time = 0;
         public Start_form()
         {
             InitializeComponent();
@@ -19,15 +20,13 @@ namespace Course_Work
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Custom_functions.color_Form(this);
+            this.BackColor = Custom_functions.backColors;
+            pic1.BackColor = Custom_functions.foreColors;
             pic1.Location = new Point(this.Width - pic1.Width - padding + 30, this.Height - pic1.Height - padding);
             start_position = pic1.Location;
             end_position = new Point(0, 0);
-            _ = Custom_functions.CreateLP(login:"",password:"");
-            //timer.Start();
-            FractalTrees ft = new FractalTrees();
-            ft.Show();
-            this.WindowState = FormWindowState.Minimized;
+            _ = Custom_functions.CreateLP(login:"Admin",password:"Admin");
+            timer.Start();
         }
 
 
@@ -40,10 +39,10 @@ namespace Course_Work
         int step = 5;
         /// <summary>
         /// dir: shows the direction where the picturebox goes.
-        /// Values of dir:
-        ///                 0 -> from bottom-right corner to top-left corner
-        ///                 1 -> from top-left corner to top-right corner\n
-        ///                 2 -> from top-right corner to bottom-right corner
+        /// Values of dir:<br></br>
+        ///                 0 -> from bottom-right corner to top-left corner<br></br>
+        ///                 1 -> from top-left corner to top-right corner<br></br>
+        ///                 2 -> from top-right corner to bottom-right corner<br></br>
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -72,10 +71,15 @@ namespace Course_Work
             }
             else if (pic1.Location.Y >= start_position.Y )
             {
+                dir = 0;
+            }
+            if (total_time > 800)
+            {
                 timer.Stop();
                 this.Hide();
                 LogIn_Form.Show();
             }
+            total_time++;
         }
 
     }
